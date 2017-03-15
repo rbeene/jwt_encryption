@@ -33,4 +33,11 @@ defmodule JwtEncryption.Mixfile do
       {:plug, "~> 1.3"}
     ]
   end
+
+  defp package do
+    [contributors: ["Robert Beene"],
+     licenses: ["MIT"],
+     linkns: %{github: "https://github.com/rbeene/jwt_encryption"},
+     files: ~w(lib mix.exs README.md)]
+  end
 end
