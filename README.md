@@ -1,7 +1,5 @@
 # Jwt Encryption
 
-[![Build Status](https://travis-ci.org/rbeene/jwt_encryption.svg)](https://trais-ci.org/rbeene/jwt_encryption)
-
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
