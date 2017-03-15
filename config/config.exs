@@ -21,6 +21,12 @@ use Mix.Config
 #     config :logger, level: :info
 #
 
+if Mix.env == :test do
+  config :jwt_encryption,
+    public_key: "test/fixtures/public_key.pem",
+    private_key: "test/fixtures/private_key.pem",
+    private_key_password: 'test'
+end
 # It is also possible to import configuration files, relative to this
 # directory. For example, you can emulate configuration per environment
 # by uncommenting the line below and defining dev.exs, test.exs and such.

@@ -1,6 +1,6 @@
-# JwtEncryption
+# Jwt Encryption
 
-**TODO: Add description**
+[![Build Status](https://travis-ci.org/rbeene/jwt_encryption.svg)](https://trais-ci.org/rbeene/jwt_encryption)
 
 ## Installation
 
