@@ -1,6 +1,6 @@
 # Jwt Encryption
 
-[![Build Status](https://travis-ci.org/rbeene/jwt_encryption.svg)](https://trais-ci.org/rbeene/jwt_encryption)
+[![CircleCI](https://circleci.com/gh/rbeene/jwt_encryption.svg?style=svg)](https://circleci.com/gh/rbeene/jwt_encryption)
 
 ## Installation
 
