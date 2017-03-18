@@ -30,7 +30,8 @@ defmodule JwtEncryption.Mixfile do
   defp deps do
     [
       {:cowboy, "~> 1.1"},
-      {:plug, "~> 1.3"}
+      {:plug, "~> 1.3"},
+      {:junit_formatter, ">= 0.0.0", only: [:test]}
     ]
   end
 
