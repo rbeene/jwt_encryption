@@ -30,7 +30,7 @@ defmodule JwtEncryption do
   """
   def encrypt(val) do
     val
-    |> :public_key.encrypt_public(public_key())
+    |> :public_key.encrypt_private(private_key())
     |> Base.encode64
   end
 
@@ -38,15 +38,16 @@ defmodule JwtEncryption do
   Decrypt strings
 
   ## Examples
-    iex> JwtEncryption.decrypt("G1G3holoRETC6r7EAergQbUY1ITKdwrRQyhihqlOLvDy4IW041V3iQgnDz8tu7+BOJgxDmUbaisY/hV6bECCYZDh2skTevPsqKp3EhwPv3OxNaSZFDsfTQnd+8GZ4C4F8Zz1llVWVQR+5MB1MhY5Kiv5IUq3/48Krh0crXgFf5Aov65AkndGcUNieHby+lFKMzLmnIeGYMI9du6VTnc837mhFA2XCLlS/oFn3OJ8qPPQg1gW2a9k010xcSf6H2+C23kVisLW0j7P9cDRNeZffO+v0dDfZRLmNYtgWN5ojZZ0XSldgZtNzv2ViIZieFASUc2F2jJGbpKrfR757TjvKHc8b7ZogL2QU9846rpHpUGmchnpmoripKoITjZAH3cfVStGOoYlO7aAM12ihL9VT3rpRg8Bam1p8a20444AikUz/om23/Cq4C1aOvMu8KfanH58p32cmRFu7vCx4Cp+QtjQiF7+aoWzqngBNiPcJTF4WuOOsDw79p0jEGX6AK6UNJG84HgV89MS1xu5nQViZpgL6ayb3eAdWQY5aMPUK2k5ORVFBAU4Z7avtsdnModyYi7U1Wt4+psxpYSnClCUQFVe12WJtPuyyBs5zci7Bml+w+ZP9LnPiRI1JfW2NnmmFtwAX8RPXipRui+Isot8pAV7JDZuMcaWsecRm0HcY8U/nCoq8Fuhw4r0H6uqJy6I+9ATCOq1X8Ga1rvAuxWdCOkh74dUk0bo5QpIVKBtQTmB2p0fCunUiKGVexriH3XK349+8r0pjIIc/CFEy6637ykE0KiV3zymqznfpdtinVr9HjiBNFu+GDL4Cbx5lNsIFQ==")
+    iex> JwtEncryption.decrypt("09ZpBkIxfeW1rqT2OYEdveArz/T1DNx+w/qhL4quSUvI5j8CLs4VlAw7kbMzHJT/NT2AtiHTwDPOkbLoRMWRt23bh31Nm3BkFCDW3F6MQgNAmZgXfwZUrfjWj8FGzq0IcfxOee5GEOSTcnX7Wp6b1l+JOsNO3QwegnOYR3lgm0USbZEBaJct9vAKayZKrw5/W5UabPO0fqcSDehFLIEzF799Oj57tCx7Kr5JeLAU0Nw7xrE2hQapeEjV3S+ro3uYBZgh6ai1dVeizUiH0Av/Di6cm/jfX3A6iyBT8Ez/T5hEeM97yn0IvyZ36LhyRhYvCDTF9MG+130GywZiT4rBjOCDKJt4smMKPZtLfWjIoeX8sRVSK/Aj06sANE6SNLz/qtjlBtU4eGpg32rS5wQdkzNb9DqiJyLZGVq0+QRnZ+ihzNyabbm+EjEZPhtfAxZG/gc+GOaO8rySbbuuB8BJXwvl284WtU6ps8NvDTAaKQsKmN3Si4TI+HNqFu7Rd9bhi1YWfM8Udh/s7AKTXriimWyYC9kPJiq7dRF+IjPP2dXzpwjnf9jNLAAvZK1P/rLKwwjNwoXPz2iDVmnEg84Qh5/alum3Kslt7anL8uT3zV6myTVbf4Q10t/mMq8ELvXeoTGXOFOZcjOWqb1A51uMfuX/FGO/GP1L4/7M4DUXlY4MpjNDnVQe4KsJrvcW0SdNPGWqo35Ka4Gp5dk9nOKQmZIMrBefleZuZT/2uQ9dCm6QDcPv+wzI7DUrNY6UX1Al9N7aK9s+9jhrIPNpJnUZ+H2am83IqL+VFyLU3KIqKQbOf0a7lnLVJuJEivxqwgowwA==")
     "Encryption for safety"
 
   """
   def decrypt(val) do
-    {:ok, val} = val |> Base.decode64
-
-    val
-    |> :public_key.decrypt_private(private_key())
+    with {:ok, value} <- val |> Base.decode64 do
+      value |> :public_key.decrypt_public(public_key())
+    else
+      nil
+    end
   end
 
   defp public_key() do
@@ -59,6 +60,7 @@ defmodule JwtEncryption do
   end
 
   defp private_key() do
+    IEx.pry
     {:ok, file} = Application.get_env(:jwt_encryption, :private_key)
     |> :file.read_file()
 
