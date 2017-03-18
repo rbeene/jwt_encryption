@@ -1,4 +1,4 @@
-ine:
+machine:
   node:
     version: 6.2.0
   environment:
@@ -25,4 +25,4 @@ test:
   override:
     - mix test
     - mkdir -p $CIRCLE_TEST_REPORTS/exunit
-    - cp _build/test/lib/portal_api/results.xml $CIRCLE_TEST_REPORTS/exunit
+    - cp _build/test/lib/jwt_encryption/results.xml $CIRCLE_TEST_REPORTS/exunit
