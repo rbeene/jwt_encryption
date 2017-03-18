@@ -26,6 +26,11 @@ if Mix.env == :test do
     public_key: "test/fixtures/public_key.pem",
     private_key: "test/fixtures/private_key.pem",
     private_key_password: 'test'
+
+  # For CircleCI
+  config :junit_formatter,
+    report_file: "results.xml",
+    print_report_file: true
 end
 # It is also possible to import configuration files, relative to this
 # directory. For example, you can emulate configuration per environment
